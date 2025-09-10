@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全栈系统级开发专家 - 从量子到硬件的技术解决方案</title>
+    <style>
+        :root {
+            --primary-color: #2a85e8;
+            --secondary-color: #121212;
+            --accent-color: #00e5ff;
+            --text-color: #f5f5f7;
+            --card-bg: #1c1c1e;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        nav {
+            background-color: rgba(18, 18, 18, 0.95);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        /* 各部分通用样式 */
+        section {
+            padding: 100px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+        
+        /* 英雄区域样式 */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.9)), 
+                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%23121212" width="100" height="100"/><path fill="%232a85e8" opacity="0.2" d="M0 0L100 100M100 0L0 100" stroke-width="0.5"/></svg>');
+            background-size: cover;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--accent-color);
+            color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* 关于我样式 */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .skill-item {
+            background-color: var(--card-bg);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s;
+            border: 1px solid rgba(42, 133, 232, 0.2);
+        }
+        
+        .skill-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+        }
+        
+        /* 服务样式 */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 10px;
+            transition: transform 0.3s;
+            border: 1px solid rgba(42, 133, 232, 0.1);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-color);
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .service-card .price {
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-top: 15px;
+            font-size: 1.2rem;
+        }
+        
+        /* 项目样式 */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .project-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .project-img {
+            height: 200px;
+            background-color: #2a2a2a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 3rem;
+        }
+        
+        .project-info {
+            padding: 20px;
+        }
+        
+        .project-info h3 {
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        /* 联系方式样式 */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .contact-form {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            background-color: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 5px;
+            color: var(--text-color);
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        /* 页脚样式 */
+        footer {
+            background-color: #0a0a0a;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .social-links a {
+            color: var(--text-color);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav>
+        <div class="container nav-container">
+            <div class="logo">DevExpert</div>
+            <ul class="nav-links">
+                <li><a href="#home">首页</a></li>
+                <li><a href="#about">关于我</a></li>
+                <li><a href="#services">服务</a></li>
+                <li><a href="#projects">项目</a></li>
+                <li><a href="#contact">联系我</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>全栈系统级开发专家</h1>
+                <p>从量子计算到硬件底层，提供全方位技术解决方案。专注于高性能系统开发、逆向工程与数据采集服务。</p>
+                <a href="#contact" class="btn">立即咨询</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于我 -->
+    <section id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>关于我</h2>
+                <p>技术全能手，问题终结者</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>从比特到量子比特的技术之旅</h3>
+                    <p>我是一名深度技术爱好者与问题解决者。我的技能树横跨从最底层的硬件驱动到最高层的应用界面，乃至前沿的量子计算。这意味着我能提供绝大多数开发者无法实现的、深度优化的、真正意义上的全栈解决方案。</p>
+                    <p>拥有多年开发经验，我专注于处理常规开发者无法解决的复杂技术难题，无论是构建高性能系统，还是剖析逆向工程，我都能提供专业级解决方案。</p>
+                    <a href="#services" class="btn">我的服务</a>
+                </div>
+                <div class="skills">
+                    <h3>技术栈</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">C</div>
+                        <div class="skill-item">C++</div>
+                        <div class="skill-item">C#</div>
+                        <div class="skill-item">Java</div>
+                        <div class="skill-item">Python</div>
+                        <div class="skill-item">Q#</div>
+                        <div class="skill-item">硬件</div>
+                        <div class="skill-item">逆向工程</div>
+                        <div class="skill-item">爬虫</div>
+                        <div class="skill-item">网络安全</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 服务 -->
+    <section id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>我的服务</h2>
+                <p>专业解决方案，满足多样需求</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>正向开发</h3>
+                    <p>高性能系统、企业级应用、桌面软件、游戏服务器、物联网解决方案、量子计算集成。</p>
+                    <div class="price">¥5,000 - ¥100,000+</div>
+                </div>
+                <div class="service-card">
+                    <h3>逆向工程</h3>
+                    <p>软件逆向分析、协议分析、漏洞研究、软件保护与破解、安全评估、移动端与游戏逆向。</p>
+                    <div class="price">¥8,000 - ¥200,000+</div>
+                </div>
+                <div class="service-card">
+                    <h3>数据采集</h3>
+                    <p>从简单采集到大规模分布式爬虫系统，突破各种反爬限制，提供稳定可靠的数据采集服务。</p>
+                    <div class="price">¥500 - ¥50,000+</div>
+                </div>
+                <div class="service-card">
+                    <h3>硬件协同开发</h3>
+                    <p>嵌入式开发、固件编写、物联网解决方案、硬件驱动开发、上位机软件。</p>
+                    <div class="price">¥15,000 - ¥80,000+</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 项目展示 -->
+    <section id="projects">
+        <div class="container">
+            <div class="section-title">
+                <h2>项目展示</h2>
+                <p>部分成功案例</p>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-img">{ }</div>
+                    <div class="project-info">
+                        <h3>高性能交易系统</h3>
+                        <p>为金融公司开发的低延迟交易系统，使用C++优化核心算法，实现微秒级响应。</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img">< ></div>
+                    <div class="project-info">
+                        <h3>物联网监控平台</h3>
+                        <p>基于嵌入式C和Python的全面监控解决方案，实现设备数据的实时采集与分析。</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img">[ ]</div>
+                    <div class="project-info">
+                        <h3>协议逆向分析</h3>
+                        <p>为安全公司分析私有通信协议，识别潜在漏洞并提供加固方案。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系方式 -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>联系我</h2>
+                <p>让我们开始合作吧</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">@</div>
+                        <div>
+                            <h3>邮箱</h3>
+                            <p>contact@devexpert.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">#</div>
+                        <div>
+                            <h3>微信</h3>
+                            <p>DevExpert_Official</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">✓</div>
+                        <div>
+                            <h3>响应时间</h3>
+                            <p>通常在24小时内回复</p>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">您的姓名</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">电子邮箱</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">项目描述</label>
+                        <textarea id="message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">发送消息</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">DevExpert</div>
+                <p>全栈系统级开发专家 - 从量子到硬件的技术解决方案</p>
+                <div class="social-links">
+                    <a href="#">G</a>
+                    <a href="#">L</a>
+                    <a href="#">F</a>
+                </div>
+                <p>© 2023 DevExpert. 保留所有权利。</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 简单的表单提交处理
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('感谢您的留言！我会尽快回复您。');
+            this.reset();
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
